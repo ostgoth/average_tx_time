@@ -49,3 +49,23 @@ def get_previous_block_hash(block_hash):
     return previous_hash
 #get_previous_block_hash('0000000000000039ad1d4e6ce4d63f73601715e23be280a4886ef3336f3b5856')
 
+response0 = requests.post('http://158.69.254.209:8301', auth=HTTPBasicAuth('klatz', 'KLZ'),
+                  json={"method": "getblockchaininfo", "params": [], "id": 1})
+block0 = json.loads(response0.content)['result']['bestblockhash']
+i = 0
+time_array = []
+while i<10:
+    print('step %s: ' % i)
+    i+= 1
+    block1 = get_previous_block_hash(block0)
+    average_tx_block = (get_block_time(block0) - get_block_time(block1)) / tx_count(block0)
+    time_array.append(average_tx_block)
+    block0 = block1
+print('time array:', time_array)
+for i in time_array:
+    sum += time_array[i]
+tx_average_time = sum / len(time_array)
+print('tx_average_time = ', tx_average_time)
+
+
+
