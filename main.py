@@ -25,6 +25,8 @@ print('block time: ', j1['result']['time'])
 print('previousblockhash: ', j1['result']['previousblockhash'])
 print(len(j1['result']['tx'])-1)
 """
+
+
 def get_block_time(block_hash):
     response1 = requests.post('http://158.69.254.209:8301', auth=HTTPBasicAuth('klatz', 'KLZ'),
                        json={"method": "getblock", "params":[block_hash], "id": 1})
@@ -33,6 +35,7 @@ def get_block_time(block_hash):
     return time_of_block
 #get_block_time('00000000000002dfd23b17a642e2a17573c9e3ca91424c3d8b099234bd317d03')
 
+
 def tx_count(block_hash):
     response3 = requests.post('http://158.69.254.209:8301', auth=HTTPBasicAuth('klatz', 'KLZ'),
                        json={"method": "getblock", "params":[block_hash], "id": 1})
@@ -40,6 +43,7 @@ def tx_count(block_hash):
     print('tx count of ' + block_hash + ' is', count)
     return count
 #tx_count('00000000000002dfd23b17a642e2a17573c9e3ca91424c3d8b099234bd317d03')
+
 
 def get_previous_block_hash(block_hash):
     response2 = requests.post('http://158.69.254.209:8301', auth=HTTPBasicAuth('klatz', 'KLZ'),
@@ -62,10 +66,8 @@ while i<10:
     time_array.append(average_tx_block)
     block0 = block1
 print('time array:', time_array)
+sum = 0
 for i in time_array:
-    sum += time_array[i]
+    sum += i
 tx_average_time = sum / len(time_array)
 print('tx_average_time = ', tx_average_time)
-
-
-
