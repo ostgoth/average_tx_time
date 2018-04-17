@@ -70,4 +70,5 @@ sum = 0
 for i in time_array:
     sum += i
 tx_average_time = sum / len(time_array)
-print('tx_average_time = ', tx_average_time)
+tx_per_minute = 60 / tx_average_time
+print('tx_per_minute= ', tx_per_minute)
